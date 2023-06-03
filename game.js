@@ -9,6 +9,17 @@ const gameOverModal = document.querySelector('.modal--game-over')
 
 let turnNumber = 0
 
+const checkForWinner = () => {
+  for (let row = 0; row < 3; row++) {
+    // const marker = boardCells[row].classList.contains('board__cell--x')
+    let isALine = true
+
+    for (let col = 0; col < 3; col++) {
+      // TODO
+    }
+  }
+}
+
 const getMarkIcon = (markIndex) => {
   return `<img src=${marks[markIndex].icon} alt="Taken Cell, ${marks[markIndex].name}" class="mark icon--${marks[markIndex].name}" />`
 }
@@ -18,11 +29,9 @@ const handlePlaceMark = (e) => {
 
   cell.classList.add(`board__cell--${marks[turnNumber % 2].colorName}`)
   cell.innerHTML = getMarkIcon(turnNumber % 2)
-  turnIndicator.classList.remove(
-    `turn-indicator__mark--${marks[turnNumber % 2].name}`,
-  )
 
-  turnIndicator.classList.add(
+  turnIndicator.classList.replace(
+    `turn-indicator__mark--${marks[turnNumber % 2].name}`,
     `turn-indicator__mark--${marks[(turnNumber + 1) % 2].name}`,
   )
   turnIndicator.innerHTML = `${marks[
@@ -46,8 +55,10 @@ const handleResetBoard = () => {
 
   turnNumber = 0
 
-  turnIndicator.classList.remove('turn-indicator__mark--o')
-  turnIndicator.classList.add('turn-indicator__mark--x')
+  turnIndicator.classList.replace(
+    'turn-indicator__mark--o',
+    'turn-indicator__mark--x',
+  )
   turnIndicator.innerHTML = "X's"
 
   gameOverModal.showModal()
