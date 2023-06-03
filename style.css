@@ -28,6 +28,8 @@ body {
 }
 
 .canvas {
+  z-index: 1;
+
   display: flex;
   flex-direction: column;
 
@@ -120,20 +122,17 @@ body {
 .btn {
   padding: 1rem;
 
-  color: var(--gray--500);
+  color: var(--white);
   font-size: 16px;
   font-weight: bold;
 
-  background-color: var(--gray--100);
-  border: solid 2px var(--gray--500);
+  background-color: var(--black);
+  border: none;
   border-radius: 0.5rem;
 }
 
 .btn--warning {
-  color: var(--white);
-
   background-color: var(--orange-500);
-  border: solid 2px var(--orange-500);
 }
 
 .clickable {
@@ -144,6 +143,39 @@ body {
 }
 .clickable:active {
   transform: scale(0.99);
+}
+
+.modal {
+  /* border: solid 2px var(--gray--500); */
+  border: none;
+  border-radius: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 2rem 8rem;
+  gap: 1rem;
+
+  justify-content: center;
+  align-items: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.modal__title {
+  color: var(--gray--500);
+  font-weight: 400;
+  font-size: 20;
+
+  margin: 0;
+}
+
+.modal__subtitle {
+  color: var(--black);
+  font-weight: 400;
+  font-size: 48px;
+
+  margin: 0;
 }
 
 @keyframes pop-out {

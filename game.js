@@ -5,6 +5,7 @@ const marks = [
 
 const boardCells = document.querySelectorAll('.board__cell')
 const turnIndicator = document.querySelector('.turn-indicator__mark')
+const gameOverModal = document.querySelector('.modal--game-over')
 
 let turnNumber = 0
 
@@ -48,7 +49,11 @@ const handleResetBoard = () => {
   turnIndicator.classList.remove('turn-indicator__mark--o')
   turnIndicator.classList.add('turn-indicator__mark--x')
   turnIndicator.innerHTML = "X's"
+
+  gameOverModal.showModal()
 }
+
+const closeModal = () => gameOverModal.close()
 
 boardCells.forEach((cell) => {
   cell.addEventListener('click', handlePlaceMark)
