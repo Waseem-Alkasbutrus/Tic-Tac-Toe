@@ -47,6 +47,7 @@ const handleResetBoard = () => {
 
   turnIndicator.classList.remove('turn-indicator__mark--o')
   turnIndicator.classList.add('turn-indicator__mark--x')
+  turnIndicator.innerHTML = "X's"
 }
 
 boardCells.forEach((cell) => {
