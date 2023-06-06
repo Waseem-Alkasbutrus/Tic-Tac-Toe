@@ -124,11 +124,11 @@ const handleResetBoard = () => {
 }
 
 const spectateBoard = () => {
-  removeCellListeners()
+  freezeCells()
   handleCloseModal()
 }
 
-const removeCellListeners = () => {
+const freezeCells = () => {
   GAME_BOARD.forEach((cell) =>
     cell.removeEventListener('click', handlePlaceMark),
   )
