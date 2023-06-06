@@ -68,19 +68,8 @@ const getMarkIcon = (markIndex) => {
 }
 
 const handlePlaceMark = (e) => {
-  const cell = e.target
-
-  cell.setAttribute('data-mark', getCurrentMark().name)
-  cell.classList.add(`board__cell--${getCurrentMark().colorName}`)
-  cell.innerHTML = getMarkIcon(turnNumber % 2)
-
-  TURN_INDICATOR.classList.replace(
-    `turn-indicator__mark--${getCurrentMark().name}`,
-    `turn-indicator__mark--${getNextMark().name}`,
-  )
-  TURN_INDICATOR.innerHTML = `${MARKS[
-    (turnNumber + 1) % 2
-  ].name.toUpperCase()}'s`
+  updateCell(e.target)
+  updateTurnIndicator()
 
   if (checkForWinner()) {
     GAMEOVER_MODAL.showModal()
@@ -89,6 +78,22 @@ const handlePlaceMark = (e) => {
   turnNumber++
 
   cell.removeEventListener('click', handlePlaceMark)
+}
+
+const updateCell = (cell) => {
+  cell.setAttribute('data-mark', getCurrentMark().name)
+  cell.classList.add(`board__cell--${getCurrentMark().colorName}`)
+  cell.innerHTML = getMarkIcon(turnNumber % 2)
+}
+
+const updateTurnIndicator = () => {
+  TURN_INDICATOR.classList.replace(
+    `turn-indicator__mark--${getCurrentMark().name}`,
+    `turn-indicator__mark--${getNextMark().name}`,
+  )
+  TURN_INDICATOR.innerHTML = `${MARKS[
+    (turnNumber + 1) % 2
+  ].name.toUpperCase()}'s`
 }
 
 const resetCell = (cell) => {
@@ -100,17 +105,16 @@ const resetCell = (cell) => {
 }
 
 const handleResetBoard = () => {
-  GAMEOVER_MODAL.close()
-
   GAME_BOARD.forEach((cell) => resetCell(cell))
-
-  turnNumber = 0
 
   TURN_INDICATOR.classList.replace(
     'turn-indicator__mark--o',
     'turn-indicator__mark--x',
   )
   TURN_INDICATOR.innerHTML = "X's"
+
+  GAMEOVER_MODAL.close()
+  turnNumber = 0
 }
 
 GAME_BOARD.forEach((cell) => {
