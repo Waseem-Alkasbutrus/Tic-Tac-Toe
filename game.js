@@ -68,7 +68,9 @@ const getMarkIcon = (markIndex) => {
 }
 
 const handlePlaceMark = (e) => {
-  updateCell(e.target)
+  const cell = e.target
+
+  updateCell(cell)
   updateTurnIndicator()
 
   if (checkForWinner()) {
