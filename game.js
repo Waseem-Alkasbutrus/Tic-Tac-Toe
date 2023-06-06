@@ -10,7 +10,7 @@ const GAMEOVER_MODAL = document.querySelector('.modal--game-over')
 
 let turnNumber = 0
 
-const checkForWinner = () => {
+const isThereAWinner = () => {
   return areRowsAndColsWinners() || areDiagonalsWinners()
 }
 
@@ -73,7 +73,11 @@ const handlePlaceMark = (e) => {
   updateCell(cell)
   updateTurnIndicator()
 
-  if (checkForWinner()) {
+  const someoneHasWon = isThereAWinner()
+
+  if (someoneHasWon) {
+    GAMEOVER_MODAL.showModal()
+  } else if (!someoneHasWon && turnNumber === 8) {
     GAMEOVER_MODAL.showModal()
   }
 
@@ -115,8 +119,23 @@ const handleResetBoard = () => {
   )
   TURN_INDICATOR.innerHTML = "X's"
 
-  GAMEOVER_MODAL.close()
+  handleCloseModal()
   turnNumber = 0
+}
+
+const spectateBoard = () => {
+  removeCellListeners()
+  handleCloseModal()
+}
+
+const removeCellListeners = () => {
+  GAME_BOARD.forEach((cell) =>
+    cell.removeEventListener('click', handlePlaceMark),
+  )
+}
+
+const handleCloseModal = () => {
+  GAMEOVER_MODAL.close()
 }
 
 GAME_BOARD.forEach((cell) => {
